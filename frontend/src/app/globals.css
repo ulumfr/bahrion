@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════
+   BAHRION — Maritime Intelligence Design System
+   ═══════════════════════════════════════════════════ */
+
+@theme inline {
+  /* Core Palette */
+  --color-abyss: #0a0a0f;
+  --color-deep-ocean: #0c1929;
+  --color-ocean: #1a3a5c;
+  --color-surface: #0f2035;
+  --color-surface-hover: #142a42;
+
+  /* Accent */
+  --color-gold: #d4a853;
+  --color-gold-bright: #f0c75e;
+  --color-gold-dim: #a07d3a;
+
+  /* Text */
+  --color-pearl: #e8e4dc;
+  --color-mist: #7a8d9e;
+  --color-foam: #c0cdd8;
+
+  /* Semantic — Conditions */
+  --color-clear: #4ecdc4;
+  --color-clear-bg: #4ecdc410;
+  --color-storm: #ff6b6b;
+  --color-storm-bg: #ff6b6b10;
+  --color-fog: #ffd93d;
+  --color-fog-bg: #ffd93d10;
+
+  /* Semantic — Directions */
+  --color-bullish: #4ecdc4;
+  --color-bearish: #ff6b6b;
+  --color-neutral: #ffd93d;
+
+  /* Borders */
+  --color-border: #1e3350;
+  --color-border-gold: #d4a85330;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-outfit);
+}
+
+/* ═══════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-abyss);
+  color: var(--color-pearl);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-abyss);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-deep-ocean);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ocean);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dim);
+}
+
+/* ═══════════════════════════════════════════════════
+   Glassmorphism Utility
+   ═══════════════════════════════════════════════════ */
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(12, 25, 41, 0.8) 0%,
+    rgba(15, 32, 53, 0.6) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.glass-card-gold {
+  background: linear-gradient(
+    135deg,
+    rgba(12, 25, 41, 0.8) 0%,
+    rgba(15, 32, 53, 0.6) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border-gold);
+  border-radius: 16px;
+}
+
+/* ═══════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes wave-drift {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25px) scaleY(0.9); }
+  100% { transform: translateX(0) scaleY(1); }
+}
+
+@keyframes compass-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-deep-ocean) 25%,
+    var(--color-surface) 50%,
+    var(--color-deep-ocean) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Staggered children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* ═══════════════════════════════════════════════════
+   Ocean Background
+   ═══════════════════════════════════════════════════ */
+
+.ocean-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(26, 58, 92, 0.3) 0%,
+    rgba(10, 10, 15, 1) 70%
+  );
+}
+
+.ocean-wave {
+  position: absolute;
+  width: 200%;
+  height: 200px;
+  bottom: -50px;
+  left: -50%;
+  opacity: 0.03;
+  border-radius: 45%;
+  background: var(--color-ocean);
+  animation: wave-drift 8s ease-in-out infinite;
+}
+
+.ocean-wave:nth-child(2) {
+  animation-duration: 12s;
+  animation-delay: -3s;
+  opacity: 0.02;
+  bottom: -30px;
+}
+
+.ocean-wave:nth-child(3) {
+  animation-duration: 16s;
+  animation-delay: -6s;
+  opacity: 0.015;
+  bottom: -10px;
+}
+
+/* ═══════════════════════════════════════════════════
+   Condition Glow Effects
+   ═══════════════════════════════════════════════════ */
+
+.glow-clear {
+  box-shadow: 0 0 30px rgba(78, 205, 196, 0.15),
+              inset 0 0 30px rgba(78, 205, 196, 0.05);
+}
+
+.glow-storm {
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.15),
+              inset 0 0 30px rgba(255, 107, 107, 0.05);
+}
+
+.glow-fog {
+  box-shadow: 0 0 30px rgba(255, 217, 61, 0.15),
+              inset 0 0 30px rgba(255, 217, 61, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════
+   Gold Accent Utilities
+   ═══════════════════════════════════════════════════ */
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient-gold {
+  border-image: linear-gradient(135deg, var(--color-gold), var(--color-gold-dim)) 1;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dim));
+  color: var(--color-abyss);
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, var(--color-gold-bright), var(--color-gold));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(212, 168, 83, 0.3);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
